@@ -4,7 +4,8 @@ $TZ_ALLOW_DEFAULT = isset($TZ_ALLOW_DEFAULT) ? $TZ_ALLOW_DEFAULT : true;
 $TZ_PLACEHOLDER = @$TZ_PLACEHOLDER ?: __('System Default');
 $TZ_TIMEZONE = @$TZ_TIMEZONE ?: '';
 ?>
-<select name="<?php echo $TZ_NAME; ?>" id="timezone-dropdown"
+<div class="form-group <?php echo $errors['timezone']?'has-error':''; ?>">
+<select class="form-control" name="<?php echo $TZ_NAME; ?>" id="timezone-dropdown"
         data-placeholder="<?php echo $TZ_PLACEHOLDER; ?>">
 <?php if ($TZ_ALLOW_DEFAULT) { ?>
         <option value=""></option>
@@ -15,8 +16,11 @@ $TZ_TIMEZONE = @$TZ_TIMEZONE ?: '';
             echo 'selected="selected"';
         ?>><?php echo str_replace('/',' / ',$zone); ?></option>
 <?php } ?>
-    </select>
-    <button type="button" class="action-button" onclick="javascript:
+</select>
+    <?php echo $errors['timezone']?'<span class="has-error">'.$errors['timezone'].'</span>':''; ?>
+</div>
+<div class="form-group">
+    <button type="button" class="btn btn-primary form-control action-button" onclick="javascript:
 $('head').append($('<script>').attr('src', '<?php
     echo ROOT_PATH; ?>js/jstz.min.js'));
 var recheck = setInterval(function() {
@@ -28,6 +32,7 @@ var recheck = setInterval(function() {
     }
 }, 100);
 return false;" style="vertical-align:middle"><i class="icon-map-marker"></i> <?php echo __('Auto Detect'); ?></button>
+</div>
 
 <script type="text/javascript">
 $(function() {

@@ -14,88 +14,80 @@ if (isset($user) && $user instanceof ClientCreateRequest) {
 $info = Format::htmlchars(($errors && $_POST)?$_POST:$info);
 
 ?>
-<h1><?php echo __('Account Registration'); ?></h1>
-<p><?php echo __(
-'Use the forms below to create or update the information we have on file for your account'
-); ?>
-</p>
+<div class="title-block">
+    <h3 class="title"><?php echo __('Account Registration'); ?></h3>
+    <p class="title-description"><?php echo __('Use the forms below to create or update the information we have on file for your account'); ?></p>
+</div>
 <form action="account.php" method="post">
-  <?php csrf_token(); ?>
-  <input type="hidden" name="do" value="<?php echo Format::htmlchars($_REQUEST['do']
+    <?php csrf_token(); ?>
+    <input type="hidden" name="do" value="<?php echo Format::htmlchars($_REQUEST['do']
     ?: ($info['backend'] ? 'import' :'create')); ?>" />
-<table width="800" class="padded">
-<tbody>
-<?php
-    $cf = $user_form ?: UserForm::getInstance();
-    $cf->render(array('staff' => false, 'mode' => 'create'));
-?>
-<tr>
-    <td colspan="2">
-        <div><hr><h3><?php echo __('Preferences'); ?></h3>
+    <?php
+        $cf = $user_form ?: UserForm::getInstance();
+        $cf->render(array('staff' => false, 'mode' => 'create'));
+    ?>
+    <div class="subtitle-block">
+        <h3 class="subtitle"><?php echo __('Preferences'); ?></h3>
+    </div>
+    <section class="section">
+        <div class="row sameheight-container">
+            <div class="col-md-12">
+                <div class="card card-block sameheight-item">
+                    <div class="title-block">
+                        <h3 class="title"><?php echo __('Time Zone');?>:</h3>
+                    </div>
+                    <div class="form-inline">
+                        <?php
+                            $TZ_NAME = 'timezone';
+                            $TZ_TIMEZONE = $info['timezone'];
+                            include INCLUDE_DIR.'staff/templates/timezone.tmpl.php'; ?>
+                    </div>
+                </div>
+            </div>
         </div>
-    </td>
-</tr>
-    <tr>
-        <td width="180">
-            <?php echo __('Time Zone');?>:
-        </td>
-        <td>
-            <?php
-            $TZ_NAME = 'timezone';
-            $TZ_TIMEZONE = $info['timezone'];
-            include INCLUDE_DIR.'staff/templates/timezone.tmpl.php'; ?>
-            <div class="error"><?php echo $errors['timezone']; ?></div>
-        </td>
-    </tr>
-<tr>
-    <td colspan=2">
-        <div><hr><h3><?php echo __('Access Credentials'); ?></h3></div>
-    </td>
-</tr>
-<?php if ($info['backend']) { ?>
-<tr>
-    <td width="180">
-        <?php echo __('Login With'); ?>:
-    </td>
-    <td>
-        <input type="hidden" name="backend" value="<?php echo $info['backend']; ?>"/>
-        <input type="hidden" name="username" value="<?php echo $info['username']; ?>"/>
-<?php foreach (UserAuthenticationBackend::allRegistered() as $bk) {
-    if ($bk::$id == $info['backend']) {
-        echo $bk->getName();
-        break;
-    }
-} ?>
-    </td>
-</tr>
-<?php } else { ?>
-<tr>
-    <td width="180">
-        <?php echo __('Create a Password'); ?>:
-    </td>
-    <td>
-        <input type="password" size="18" name="passwd1" value="<?php echo $info['passwd1']; ?>">
-        &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd1']; ?></span>
-    </td>
-</tr>
-<tr>
-    <td width="180">
-        <?php echo __('Confirm New Password'); ?>:
-    </td>
-    <td>
-        <input type="password" size="18" name="passwd2" value="<?php echo $info['passwd2']; ?>">
-        &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd2']; ?></span>
-    </td>
-</tr>
-<?php } ?>
-</tbody>
-</table>
-<hr>
-<p style="text-align: center;">
-    <input type="submit" value="Register"/>
-    <input type="button" value="Cancel" onclick="javascript:
+    </section>
+    <div class="subtitle-block">
+        <h3 class="subtitle"><?php echo __('Access Credentials'); ?></h3>
+    </div>
+    <section class="section">
+        <div class="row sameheight-container">
+            <div class="col-md-12">
+                <div class="card card-block sameheight-item">
+                <?php if ($info['backend']) { ?>
+                    <div class="title-block">
+                        <h3 class="title"><?php echo __('Login With'); ?>:</h3>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="backend" value="<?php echo $info['backend']; ?>"/>
+                        <input type="hidden" name="username" value="<?php echo $info['username']; ?>"/>
+                        <?php foreach (UserAuthenticationBackend::allRegistered() as $bk) {
+                            if ($bk::$id == $info['backend']) {
+                                echo $bk->getName();
+                                break;
+                            }
+                        } ?>
+                    </div>
+                <?php } else { ?>
+                    <div class="form-group <?php echo $errors['passwd1']?'has-error':''; ?>">
+                        <label for="passwd1"><?php echo __('Create a Password'); ?>:</label>
+                        <input class="form-control" type="password" size="18" name="passwd1" value="<?php echo $info['passwd1']; ?>">
+                        <?php echo $errors['passwd1']?'<span class="has-error">'.$errors['passwd1'].'</span>':''; ?>
+                    </div>
+                    <div class="form-group <?php echo $errors['passwd2']?'has-error':''; ?>">
+                        <label for="passwd2"><?php echo __('Confirm New Password'); ?>:</label>
+                        <input class="form-control" type="password" size="18" name="passwd2" value="<?php echo $info['passwd2']; ?>">
+                        <?php echo $errors['passwd2']?'<span class="has-error">'.$errors['passwd2'].'</span>':''; ?>
+                    </div>
+                <?php } ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <p style="text-align: center;">
+        <input class="btn btn-primary" type="submit" value="Register"/>
+        <input class="btn btn-info" type="button" value="Cancel" onclick="javascript:
         window.location.href='index.php';"/>
-</p>
+    </p>
 </form>
 <?php if (!isset($info['timezone'])) { ?>
 <!-- Auto detect client's timezone where possible -->

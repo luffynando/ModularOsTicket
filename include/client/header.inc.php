@@ -111,6 +111,18 @@ if ($lang) {
                 <div class="header-block header-block-search">
                 </div>
                 <div class="header-block header-block-buttons">
+                    <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                    <a href="https://github.com/modularcode/modular-admin-html/stargazers" class="btn btn-sm header-btn">
+                        <i class="fa fa-star"></i>
+                        <span>Star Us</span>
+                    </a>
+                    <a href="https://github.com/modularcode/modular-admin-html/releases" class="btn btn-sm header-btn">
+                        <i class="fa fa-cloud-download"></i>
+                        <span>Download .zip</span>
+                    </a>
                 </div>
                 <div class="header-block header-block-nav">
                     <ul class="nav-profile">
@@ -136,13 +148,13 @@ if ($lang) {
                     <?php
                     } elseif($nav) {
                         if ($cfg->getClientRegistrationMode() == 'public') { ?>
-                            <?php echo '<li><a>'.__('Guest User').'</a></li>'; ?><?php
+                            <?php echo '<li class="d-none d-md-block"><a>'.__('Guest User').'</a></li>'; ?><?php
                         }
                         if ($thisclient && $thisclient->isValid() && $thisclient->isGuest()) { ?>
-                            <li><a class="nav-link" href="<?php echo $signout_url; ?>"><?php echo __('Sign Out'); ?></a></li><?php
+                            <li class="header-block header-block-buttons"><a class="btn header-btn" href="<?php echo $signout_url; ?>"><i class="fa fa-sign-out"></i><span><?php echo __('Sign Out'); ?></span></a></li><?php
                         }
                         elseif ($cfg->getClientRegistrationMode() != 'disabled') { ?>
-                            <li><a class="nav-link" href="<?php echo $signin_url; ?>"><?php echo __('Sign In'); ?></a></li>
+                            <li class="header-block header-block-buttons"><a class="btn header-btn" href="<?php echo $signin_url; ?>"><i class="fa fa-sign-in"></i><span><?php echo __('Sign In'); ?></span></a></li>
                         <?php
                         }
                     } ?>
@@ -195,7 +207,7 @@ if ($lang) {
                             <?php
                             if($nav && ($navs=$nav->getNavLinks()) && is_array($navs)){
                                 foreach($navs as $name =>$nav) {
-                                    echo sprintf('<li class="%s"><a class="%s" href="%s">%s</a></li>%s',$nav['active']?'active':'',$name,(ROOT_PATH.$nav['href']),$nav['desc'],"\n");
+                                    echo sprintf('<li class="%s"><a class="%s" href="%s"><i class="fa %s"></i>%s</a></li>%s',$nav['active']?'active':'',$name,(ROOT_PATH.$nav['href']),$nav['icon'],$nav['desc'],"\n");
                                 }
                             } ?>
                         </ul>

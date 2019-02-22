@@ -36,6 +36,9 @@ if (($lang = Internationalization::getCurrentLanguage()) && $lang != 'en_US') { 
     ?>);
 </script>
 <script src="<?php echo MODULAR_PATH; ?>js/vendor.js"></script>
+<script>
+    var jq300 = jQuery.noConflict();
+</script>
 <script src="<?php echo MODULAR_PATH; ?>js/app.js"></script>
 </body>
 </html>

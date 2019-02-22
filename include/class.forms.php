@@ -3830,7 +3830,7 @@ class TextboxWidget extends Widget {
         if (isset($config['length']) && $config['length'])
             $maxlength = "maxlength=\"{$config['length']}\"";
         if (isset($config['classes']))
-            $classes = 'class="'.$config['classes'].'"';
+            $classes = 'class="form-control '.$config['classes'].'"';
         if (isset($config['autocomplete']))
             $autocomplete = 'autocomplete="'.($config['autocomplete']?'on':'off').'"';
         if (isset($config['autofocus']))
@@ -3848,7 +3848,10 @@ class TextboxWidget extends Widget {
             $type = $types[$config['validator']];
         $placeholder = sprintf('placeholder="%s"', $this->field->getLocal('placeholder',
             $config['placeholder']));
+        
+        $classes = $classes ? $classes : 'class="form-control"';     
         ?>
+        
         <input type="<?php echo $type; ?>"
             id="<?php echo $this->id; ?>"
             <?php echo implode(' ', array_filter(array(
@@ -3913,7 +3916,7 @@ class TextareaWidget extends Widget {
         if (isset($config['length']) && $config['length'])
             $maxlength = "maxlength=\"{$config['length']}\"";
         if (isset($config['html']) && $config['html']) {
-            $class = array('richtext', 'no-bar');
+            $class = array('richtext', 'no-bar', 'form-control');
             $class[] = @$config['size'] ?: 'small';
             $class = sprintf('class="%s"', implode(' ', $class));
             $this->value = Format::viewableImages($this->value);
@@ -3954,15 +3957,18 @@ class PhoneNumberWidget extends Widget {
         $config = $this->field->getConfiguration();
         list($phone, $ext) = explode("X", $this->value);
         ?>
-        <input id="<?php echo $this->id; ?>" type="tel" name="<?php echo $this->name; ?>" value="<?php
+        <div class="form-inline">
+        <input class="form-control" id="<?php echo $this->id; ?>" type="tel" name="<?php echo $this->name; ?>" value="<?php
         echo Format::htmlchars($phone); ?>"/><?php
         // Allow display of extension field even if disabled if the phone
         // number being edited has an extension
-        if ($ext || $config['ext']) { ?> <?php echo __('Ext'); ?>:
-            <input type="text" name="<?php
+        if ($ext || $config['ext']) { ?><?php echo __('Ext'); ?>:
+            <input class="form-control" type="text" name="<?php
             echo $this->name; ?>-ext" value="<?php echo Format::htmlchars($ext);
                 ?>" size="5"/>
-        <?php }
+        <?php } ?>
+        </div>    
+        <?php 
     }
 
     function getValue() {
@@ -4257,7 +4263,7 @@ class TimezoneWidget extends ChoicesWidget {
         $config = $this->field->getConfiguration();
         if (@$config['autodetect']) {
         ?>
-        <button type="button" class="action-button" onclick="javascript:
+        <button type="button" class="btn btn-primary action-button" onclick="javascript:
             $('head').append($('<script>').attr('src', '<?php
             echo ROOT_PATH; ?>js/jstz.min.js'));
             var recheck = setInterval(function() {

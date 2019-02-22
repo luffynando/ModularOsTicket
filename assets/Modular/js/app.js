@@ -1,15 +1,15 @@
 var config = window.config = {};
 
 // Config reference element
-var $ref = $("#ref");
+var jq300ref = jq300("#ref");
 
 // Configure responsive bootstrap toolkit
 config.ResponsiveBootstrapToolkitVisibilityDivs = {
-    'xs': $('<div class="device-xs 				  hidden-sm-up"></div>'),
-    'sm': $('<div class="device-sm hidden-xs-down hidden-md-up"></div>'),
-    'md': $('<div class="device-md hidden-sm-down hidden-lg-up"></div>'),
-    'lg': $('<div class="device-lg hidden-md-down hidden-xl-up"></div>'),
-    'xl': $('<div class="device-xl hidden-lg-down			  "></div>'),
+    'xs': jq300('<div class="device-xs 				  hidden-sm-up"></div>'),
+    'sm': jq300('<div class="device-sm hidden-xs-down hidden-md-up"></div>'),
+    'md': jq300('<div class="device-md hidden-sm-down hidden-lg-up"></div>'),
+    'lg': jq300('<div class="device-lg hidden-md-down hidden-xl-up"></div>'),
+    'xl': jq300('<div class="device-xl hidden-lg-down			  "></div>'),
 };
 
 ResponsiveBootstrapToolkit.use('Custom', config.ResponsiveBootstrapToolkitVisibilityDivs);
@@ -23,14 +23,14 @@ config.validations = {
 
 	// add error class
 	highlight: function(element, errorClass, validClass) {
-		$(element).parents("div.form-group")
+		jq300(element).parents("div.form-group")
 		.addClass(errorClass)
 		.removeClass(validClass); 
 	}, 
 
 	// add error class
 	unhighlight: function(element, errorClass, validClass) {
-		$(element).parents(".has-error")
+		jq300(element).parents(".has-error")
 		.removeClass(errorClass)
 		.addClass(validClass); 
 	},
@@ -47,40 +47,40 @@ config.delayTime = 50;
 // chart configurations
 config.chart = {};
 
-config.chart.colorPrimary = tinycolor($ref.find(".chart .color-primary").css("color"));
-config.chart.colorSecondary = tinycolor($ref.find(".chart .color-secondary").css("color"));
+config.chart.colorPrimary = tinycolor(jq300ref.find(".chart .color-primary").css("color"));
+config.chart.colorSecondary = tinycolor(jq300ref.find(".chart .color-secondary").css("color"));
 /***********************************************
 *        Animation Settings
 ***********************************************/
 function animate(options) {
 	var animationName = "animated " + options.name;
 	var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-	$(options.selector)
+	jq300(options.selector)
 	.addClass(animationName)
 	.one(animationEnd, 
 		function(){
-			$(this).removeClass(animationName);
+			jq300(this).removeClass(animationName);
 		}
 	);
 }
 
-$(function() {
-	var $itemActions = $(".item-actions-dropdown");
+jq300(function() {
+	var jq300itemActions = jq300(".item-actions-dropdown");
 
-	$(document).on('click',function(e) {
-		if (!$(e.target).closest('.item-actions-dropdown').length) {
-			$itemActions.removeClass('active');
+	jq300(document).on('click',function(e) {
+		if (!jq300(e.target).closest('.item-actions-dropdown').length) {
+			jq300itemActions.removeClass('active');
 		}
 	});
 	
-	$('.item-actions-toggle-btn').on('click',function(e){
+	jq300('.item-actions-toggle-btn').on('click',function(e){
 		e.preventDefault();
 
-		var $thisActionList = $(this).closest('.item-actions-dropdown');
+		var jq300thisActionList = jq300(this).closest('.item-actions-dropdown');
 
-		$itemActions.not($thisActionList).removeClass('active');
+		jq300itemActions.not(jq300thisActionList).removeClass('active');
 
-		$thisActionList.toggleClass('active');	
+		jq300thisActionList.toggleClass('active');	
 	});
 });
 
@@ -93,52 +93,52 @@ var npSettings = {
 }
 
 NProgress.configure(npSettings);
-$(function() {
+jq300(function() {
 	setSameHeights();
 
 	var resizeTimer;
 
-	$(window).resize(function() {
+	jq300(window).resize(function() {
 		clearTimeout(resizeTimer);
         resizeTimer = setTimeout(setSameHeights, 150);
 	});
 });
 
 
-function setSameHeights($container) {
+function setSameHeights(jq300container) {
 
-	$container = $container || $('.sameheight-container');
+	jq300container = jq300container || jq300('.sameheight-container');
 
 	var viewport = ResponsiveBootstrapToolkit.current();
 
-	$container.each(function() {
+	jq300container.each(function() {
 
-		var $items = $(this).find(".sameheight-item");
+		var jq300items = jq300(this).find(".sameheight-item");
 
 		// Get max height of items in container
 		var maxHeight = 0;
 
-		$items.each(function() {
-			$(this).css({height: 'auto'});
-			maxHeight = Math.max(maxHeight, $(this).innerHeight());
+		jq300items.each(function() {
+			jq300(this).css({height: 'auto'});
+			maxHeight = Math.max(maxHeight, jq300(this).innerHeight());
 		});
 
 
 		// Set heights of items
-		$items.each(function() {
+		jq300items.each(function() {
 			// Ignored viewports for item
-			var excludedStr = $(this).data('exclude') || '';
+			var excludedStr = jq300(this).data('exclude') || '';
 			var excluded = excludedStr.split(',');
 
 			// Set height of element if it's not excluded on 
 			if (excluded.indexOf(viewport) === -1) {
-				$(this).innerHeight(maxHeight);
+				jq300(this).innerHeight(maxHeight);
 			}
 		});
 	});
 }
 
-$(function() {
+jq300(function() {
 	animate({
 		name: 'flipInY',
 		selector: '.error-card > .error-title-block'
@@ -146,19 +146,19 @@ $(function() {
 
 
 	setTimeout(function(){
-		var $el = $('.error-card > .error-container');
+		var jq300el = jq300('.error-card > .error-container');
 
 		animate({
 			name: 'fadeInUp',
-			selector: $el 
+			selector: jq300el 
 		});
 
-		$el.addClass('visible');
+		jq300el.addClass('visible');
 	}, 1000);
 })
 //LoginForm validation
-$(function() {
-	if (!$('#login-form').length) {
+jq300(function() {
+	if (!jq300('#login-form').length) {
         return false;
     }
 
@@ -187,13 +187,13 @@ $(function() {
 		}
 	}
 
-	$.extend(loginValidationSettings, config.validations);
+	jq300.extend(loginValidationSettings, config.validations);
 
-    $('#login-form').validate(loginValidationSettings);
+    jq300('#login-form').validate(loginValidationSettings);
 })
 //SignupForm validation
-$(function() {
-	if (!$('#signup-form').length) {
+jq300(function() {
+	if (!jq300('#signup-form').length) {
         return false;
     }
 
@@ -231,7 +231,7 @@ $(function() {
 				element.attr("name") == "firstname" || 
 				element.attr("name") == "lastname" 
 			) {
-				error.insertAfter($("#lastname").closest('.row'));
+				error.insertAfter(jq300("#lastname").closest('.row'));
 				element.parents("div.form-group")
 				.addClass('has-error');
 			} 
@@ -239,7 +239,7 @@ $(function() {
 				element.attr("name") == "password" || 
 				element.attr("name") == "retype_password" 
 			) {
-				error.insertAfter($("#retype_password").closest('.row'));
+				error.insertAfter(jq300("#retype_password").closest('.row'));
 				element.parents("div.form-group")
 				.addClass('has-error');
 			}
@@ -275,13 +275,13 @@ $(function() {
 		}
 	}
 
-	$.extend(signupValidationSettings, config.validations);
+	jq300.extend(signupValidationSettings, config.validations);
 
-    $('#signup-form').validate(signupValidationSettings);
+    jq300('#signup-form').validate(signupValidationSettings);
 });
 //ResetForm validation
-$(function() {
-	if (!$('#reset-form').length) {
+jq300(function() {
+	if (!jq300('#reset-form').length) {
         return false;
     }
 
@@ -306,37 +306,37 @@ $(function() {
 		}
 	}
 
-	$.extend(resetValidationSettings, config.validations);
+	jq300.extend(resetValidationSettings, config.validations);
 
-    $('#reset-form').validate(resetValidationSettings);
+    jq300('#reset-form').validate(resetValidationSettings);
 })
-$(function() {
+jq300(function() {
 
-	$(".wyswyg").each(function() {
+	jq300(".wyswyg").each(function() {
 
-		var $editor = $(this).find(".editor");
-		var $toolbar = $(this).find(".toolbar");
+		var jq300editor = jq300(this).find(".editor");
+		var jq300toolbar = jq300(this).find(".toolbar");
 
-		var editor = new Quill($editor.get(0), {
+		var editor = new Quill(jq300editor.get(0), {
 			theme: 'snow',
 			// modules: {
 			// 	toolbar: toolbarOptions
 			// }
 			modules: {
-				toolbar: $toolbar.get(0)
+				toolbar: jq300toolbar.get(0)
 			}
 		});
 
-		// var $toolbar = $(this).find(".toolbar");
-		// var $editor = $(this).find(".editor");
+		// var jq300toolbar = jq300(this).find(".toolbar");
+		// var jq300editor = jq300(this).find(".editor");
 
 
-		// var editor = new Quill($editor.get(0), {
+		// var editor = new Quill(jq300editor.get(0), {
 		// 	theme: 'snow'
 		// });
 
 		// editor.addModule('toolbar', {
-		// 	container: $toolbar.get(0)     // Selector for toolbar container
+		// 	container: jq300toolbar.get(0)     // Selector for toolbar container
 		// });
 
 
@@ -345,36 +345,36 @@ $(function() {
 
 });
 
-$(function () {
+jq300(function () {
 
-	$('#sidebar-menu, #customize-menu').metisMenu({
+	jq300('#sidebar-menu, #customize-menu').metisMenu({
 		activeClass: 'open'
 	});
 
 
-	$('#sidebar-collapse-btn').on('click', function(event){
+	jq300('#sidebar-collapse-btn').on('click', function(event){
 		event.preventDefault();
 		
-		$("#app").toggleClass("sidebar-open");
+		jq300("#app").toggleClass("sidebar-open");
 	});
 
-	$("#sidebar-overlay").on('click', function() {
-		$("#app").removeClass("sidebar-open");
+	jq300("#sidebar-overlay").on('click', function() {
+		jq300("#app").removeClass("sidebar-open");
 	});
 
-	if ($.browser.mobile) {
-		var $appContainer = $('#app ');
-		var $mobileHandle = $('#sidebar-mobile-menu-handle ');
+	if (jq300.browser.mobile) {
+		var jq300appContainer = jq300('#app ');
+		var jq300mobileHandle = jq300('#sidebar-mobile-menu-handle ');
 
-		$mobileHandle.swipe({
+		jq300mobileHandle.swipe({
 			swipeLeft: function() {
-				if($appContainer.hasClass("sidebar-open")) {
-					$appContainer.removeClass("sidebar-open");	
+				if(jq300appContainer.hasClass("sidebar-open")) {
+					jq300appContainer.removeClass("sidebar-open");	
 				}
 			},
 			swipeRight: function() {
-				if(!$appContainer.hasClass("sidebar-open")) {
-					$appContainer.addClass("sidebar-open");
+				if(!jq300appContainer.hasClass("sidebar-open")) {
+					jq300appContainer.addClass("sidebar-open");
 				}
 			},
 			// excludedElements: "button, input, select, textarea, .noSwipe, table", 
@@ -383,15 +383,15 @@ $(function () {
 	}
 	
 });
-$(function() {
+jq300(function() {
     
-    if (!$('#morris-one-line-chart').length) {
+    if (!jq300('#morris-one-line-chart').length) {
         return false;
     }
 
     function drawMorrisCharts() {
 
-        $('#morris-one-line-chart').empty();
+        jq300('#morris-one-line-chart').empty();
         
         Morris.Line({
             element: 'morris-one-line-chart',
@@ -413,7 +413,7 @@ $(function() {
             pointSize:5,
         });
 
-        $('#morris-area-chart').empty();
+        jq300('#morris-area-chart').empty();
 
         Morris.Area({
             element: 'morris-area-chart',
@@ -442,7 +442,7 @@ $(function() {
             pointSize:1,
         });
 
-        $('#morris-donut-chart').empty();
+        jq300('#morris-donut-chart').empty();
 
         Morris.Donut({
             element: 'morris-donut-chart',
@@ -457,7 +457,7 @@ $(function() {
             ],
         });
 
-        $('#morris-bar-chart').empty();
+        jq300('#morris-bar-chart').empty();
 
         Morris.Bar({
             element: 'morris-bar-chart',
@@ -479,7 +479,7 @@ $(function() {
             ],
         });
 
-        $('#morris-line-chart').empty();
+        jq300('#morris-line-chart').empty();
 
         Morris.Line({
             element: 'morris-line-chart',
@@ -504,14 +504,14 @@ $(function() {
 
     drawMorrisCharts();
 
-    $(document).on("themechange", function(){
+    jq300(document).on("themechange", function(){
         drawMorrisCharts();
     });
 });
 //Flot Bar Chart
-$(function() {
+jq300(function() {
 
-    if (!$('#flot-bar-chart').length) {
+    if (!jq300('#flot-bar-chart').length) {
         return false;
     }
 
@@ -562,7 +562,7 @@ $(function() {
                 [6, 44]
             ]
         };
-        $.plot($("#flot-bar-chart"), [barData], barOptions);
+        jq300.plot(jq300("#flot-bar-chart"), [barData], barOptions);
 
 
         // Flot line chart
@@ -611,7 +611,7 @@ $(function() {
                 [6, 44]
             ]
         };
-        $.plot($("#flot-line-chart"), [barData], lineOptions);
+        jq300.plot(jq300("#flot-line-chart"), [barData], lineOptions);
 
         //Flot Pie Chart
         var data = [{
@@ -632,7 +632,7 @@ $(function() {
             color: tinycolor(config.chart.colorPrimary.toString()).darken(10),
         }];
 
-        var plotObj = $.plot($("#flot-pie-chart"), data, {
+        var plotObj = jq300.plot(jq300("#flot-pie-chart"), data, {
             series: {
                 pie: {
                     show: true
@@ -654,7 +654,7 @@ $(function() {
 
 
         //live chart example
-        var container = $("#flot-line-chart-moving");
+        var container = jq300("#flot-line-chart-moving");
         container.empty();
         // Determine how many data points to keep based on the placeholder's initial size;
         // this gives us a nice high-res plot while avoiding more than one point per pixel.
@@ -695,7 +695,7 @@ $(function() {
         }];
 
 
-        var plot = $.plot(container, series, {
+        var plot = jq300.plot(container, series, {
             grid: {
 
                 color: "#999999",
@@ -778,9 +778,9 @@ $(function() {
         }
 
         function doPlot(position) {
-            $.plot($("#flot-line-chart-multi"), [{
+            jq300.plot(jq300("#flot-line-chart-multi"), [{
                 data: oilprices,
-                label: "Oil price ($)"
+                label: "Oil price (jq300)"
             }, {
                 data: exchangerates,
                 label: "USD/EUR exchange rate",
@@ -814,8 +814,8 @@ $(function() {
 					show: true,
 					content: "%s for %x was %y",
                     xDateFormat: "%y-%m-%d",
-                    onHover: function(flotItem, $tooltipEl) {
-                        // console.log(flotItem, $tooltipEl);
+                    onHover: function(flotItem, jq300tooltipEl) {
+                        // console.log(flotItem, jq300tooltipEl);
                     }
 				}
 
@@ -824,23 +824,23 @@ $(function() {
 
         doPlot("right");
 
-        $("button").click(function() {
-            doPlot($(this).text());
+        jq300("button").click(function() {
+            doPlot(jq300(this).text());
         });
 
     }
 
     drawFlotCharts();
 
-    $(document).on("themechange", function(){
+    jq300(document).on("themechange", function(){
         drawFlotCharts();
     });
 
 });
 
-$(function() {
+jq300(function() {
 
-    if (!$('#dashboard-visits-chart').length) {
+    if (!jq300('#dashboard-visits-chart').length) {
         return false;
     }
 
@@ -850,23 +850,23 @@ $(function() {
     var el = null;
     var item = 'visits';
 
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    jq300('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
        el = e.target;
-       item = $(el).attr('href').replace('#', '');
+       item = jq300(el).attr('href').replace('#', '');
        switchHistoryCharts(item);
 
     });
 
-    $(document).on("themechange", function(){
+    jq300(document).on("themechange", function(){
         switchHistoryCharts(item);
     });
 
     function switchHistoryCharts(item){
         var chartSelector = "#dashboard-" + item + "-chart";
 
-        if ($(chartSelector).has('svg').length) {
-            $(chartSelector).empty();
+        if (jq300(chartSelector).has('svg').length) {
+            jq300(chartSelector).empty();
         }
 
         switch(item){
@@ -984,16 +984,16 @@ $(function() {
 
 
 
-$(function() {
+jq300(function() {
 	
 
 	function drawDashboardItemsListSparklines(){
-		$(".dashboard-page .items .sparkline").each(function() {
-			var type = $(this).data('type');
+		jq300(".dashboard-page .items .sparkline").each(function() {
+			var type = jq300(this).data('type');
 
 			// There is predefined data
-			if ($(this).data('data')) {
-				var data = $(this).data('data').split(',').map(function(item) {
+			if (jq300(this).data('data')) {
+				var data = jq300(this).data('data').split(',').map(function(item) {
 					if (item.indexOf(":") > 0) {
 						return item.split(":");
 					}
@@ -1011,9 +1011,9 @@ $(function() {
 			}
 
 
-			$(this).sparkline(data, {
+			jq300(this).sparkline(data, {
 				barColor: config.chart.colorPrimary.toString(),
-				height: $(this).height(),
+				height: jq300(this).height(),
 				type: type
 			});
 		});
@@ -1021,21 +1021,21 @@ $(function() {
 
 	drawDashboardItemsListSparklines();
 
-	$(document).on("themechange", function(){
+	jq300(document).on("themechange", function(){
         drawDashboardItemsListSparklines();
     });
 });
-$(function() {
+jq300(function() {
 
-    var $dashboardSalesMap = $('#dashboard-sales-map');
+    var jq300dashboardSalesMap = jq300('#dashboard-sales-map');
 
-    if (!$dashboardSalesMap.length) {
+    if (!jq300dashboardSalesMap.length) {
         return false;
     }
 
     function drawSalesMap() {
 
-        $dashboardSalesMap.empty();
+        jq300dashboardSalesMap.empty();
 
         var color = config.chart.colorPrimary.toHexString();
         var darkColor = tinycolor(config.chart.colorPrimary.toString()).darken(40).toHexString();
@@ -1055,7 +1055,7 @@ $(function() {
             au: 5000
         };
 
-        $dashboardSalesMap.vectorMap({
+        jq300dashboardSalesMap.vectorMap({
             map: 'world_en',
             backgroundColor: 'transparent',
             color: '#E5E3E5',
@@ -1071,21 +1071,21 @@ $(function() {
 
     drawSalesMap();
 
-    $(document).on("themechange", function(){
+    jq300(document).on("themechange", function(){
        drawSalesMap();
     });
 });
-$(function() {
+jq300(function() {
 
-    var $dashboardSalesBreakdownChart = $('#dashboard-sales-breakdown-chart');
+    var jq300dashboardSalesBreakdownChart = jq300('#dashboard-sales-breakdown-chart');
 
-    if (!$dashboardSalesBreakdownChart.length) {
+    if (!jq300dashboardSalesBreakdownChart.length) {
         return false;
     } 
 
     function drawSalesChart(){
 
-    $dashboardSalesBreakdownChart.empty();
+    jq300dashboardSalesBreakdownChart.empty();
 
         Morris.Donut({
             element: 'dashboard-sales-breakdown-chart',
@@ -1100,24 +1100,24 @@ $(function() {
             ],
         });
 
-        var $sameheightContainer = $dashboardSalesBreakdownChart.closest(".sameheight-container");
+        var jq300sameheightContainer = jq300dashboardSalesBreakdownChart.closest(".sameheight-container");
 
-        setSameHeights($sameheightContainer);
+        setSameHeights(jq300sameheightContainer);
     }
 
     drawSalesChart();
 
-    $(document).on("themechange", function(){
+    jq300(document).on("themechange", function(){
        drawSalesChart();
     });
     
 })
-$(function() {
+jq300(function() {
 
-	$('.actions-list > li').on('click', '.check', function(e){
+	jq300('.actions-list > li').on('click', '.check', function(e){
 		e.preventDefault();
 
-		$(this).parents('.tasks-item')
+		jq300(this).parents('.tasks-item')
 		.find('.checkbox')
 		.prop("checked",  true);
 
@@ -1125,63 +1125,63 @@ $(function() {
 	});
 
 });
-$(function(){
+jq300(function(){
 
 	// set sortable options
-	var sortable = new Sortable($('.images-container').get(0), {
+	var sortable = new Sortable(jq300('.images-container').get(0), {
 		animation: 150,
 		handle: ".control-btn.move",
 		draggable: ".image-container",
 		onMove: function (evt) {
-			var $relatedElem = $(evt.related);
+			var jq300relatedElem = jq300(evt.related);
 
-	        if ($relatedElem.hasClass('add-image')) {
+	        if (jq300relatedElem.hasClass('add-image')) {
 	        	return false;
 	        }
 	    }
 	});
 
 
-	$controlsButtons = $('.controls');
+	jq300controlsButtons = jq300('.controls');
 
-	$controlsButtonsStar = $controlsButtons.find('.star');
-	$controlsButtonsRemove = $controlsButtons.find('.remove');
+	jq300controlsButtonsStar = jq300controlsButtons.find('.star');
+	jq300controlsButtonsRemove = jq300controlsButtons.find('.remove');
 
-	$controlsButtonsStar.on('click',function(e){
+	jq300controlsButtonsStar.on('click',function(e){
 		e.preventDefault();
 
-		$controlsButtonsStar.removeClass('active');
-		$controlsButtonsStar.parents('.image-container').removeClass('main');
+		jq300controlsButtonsStar.removeClass('active');
+		jq300controlsButtonsStar.parents('.image-container').removeClass('main');
 
-		$(this).addClass('active');
+		jq300(this).addClass('active');
 
-		$(this).parents('.image-container').addClass('main');
+		jq300(this).parents('.image-container').addClass('main');
 	})
 
 })
 
-$(function() {
+jq300(function() {
 
-    if (!$('#select-all-items').length) {
+    if (!jq300('#select-all-items').length) {
         return false;
     }
 
 
-    $('#select-all-items').on('change', function() {
-        var $this = $(this).children(':checkbox').get(0);    
+    jq300('#select-all-items').on('change', function() {
+        var jq300this = jq300(this).children(':checkbox').get(0);    
 
-        $(this).parents('li')
+        jq300(this).parents('li')
             .siblings()
             .find(':checkbox')
-            .prop('checked', $this.checked)
-            .val($this.checked)
+            .prop('checked', jq300this.checked)
+            .val(jq300this.checked)
             .change();
     });
 
 
     function drawItemsListSparklines(){
-        $(".items-list-page .sparkline").each(function() {
-            var type = $(this).data('type');
+        jq300(".items-list-page .sparkline").each(function() {
+            var type = jq300(this).data('type');
 
             // Generate random data
             var data = [];
@@ -1189,9 +1189,9 @@ $(function() {
                 data.push(Math.round(100 * Math.random()));
             }
 
-            $(this).sparkline(data, {
+            jq300(this).sparkline(data, {
                 barColor: config.chart.colorPrimary.toString(),
-                height: $(this).height(),
+                height: jq300(this).height(),
                 type: type
             });
         });
@@ -1199,27 +1199,27 @@ $(function() {
 
     drawItemsListSparklines();
 
-    $(document).on("themechange", function(){
+    jq300(document).on("themechange", function(){
         drawItemsListSparklines();
     });
 
 });
 //LoginForm validation
-$(function() {
-	if (!$('.form-control').length) {
+jq300(function() {
+	if (!jq300('.form-control').length) {
         return false;
     }
 
-    $('.form-control').focus(function() {
-		$(this).siblings('.input-group-addon').addClass('focus');
+    jq300('.form-control').focus(function() {
+		jq300(this).siblings('.input-group-addon').addClass('focus');
 	});
 
-	$('.form-control').blur(function() {
-		$(this).siblings('.input-group-addon').removeClass('focus');
+	jq300('.form-control').blur(function() {
+		jq300(this).siblings('.input-group-addon').removeClass('focus');
 	});
 });
 var modalMedia = {
-	$el: $("#modal-media"),
+	jq300el: jq300("#modal-media"),
 	result: {},
 	options: {},
 	open: function(options) {
@@ -1227,16 +1227,16 @@ var modalMedia = {
 		this.options = options;
 
 
-		this.$el.modal('show');
+		this.jq300el.modal('show');
 	},
 	close: function() {
-		if ($.isFunction(this.options.beforeClose)) {
+		if (jq300.isFunction(this.options.beforeClose)) {
 			this.options.beforeClose(this.result);
 		}
 
-		this.$el.modal('hide');
+		this.jq300el.modal('hide');
 
-		if ($.isFunction(this.options.afterClose)) {
+		if (jq300.isFunction(this.options.afterClose)) {
 			this.options.beforeClose(this.result);
 		}
 	}
@@ -1244,34 +1244,34 @@ var modalMedia = {
 // Animating dropdowns is temporary disabled
 // Please feel free to send a pull request :)
 
-// $(function() {
-// 	$('.nav-profile > li > a').on('click', function() {
-// 		var $el = $(this).next();
+// jq300(function() {
+// 	jq300('.nav-profile > li > a').on('click', function() {
+// 		var jq300el = jq300(this).next();
 
 
 // 		animate({
 // 			name: 'flipInX',
-// 			selector: $el
+// 			selector: jq300el
 // 		});
 // 	});
 // })
 
-$(function () {
+jq300(function () {
 
 	// Local storage settings
 	var themeSettings = getThemeSettings();
 
 	// Elements
 
-	var $app = $('#app');
-	var $styleLink = $('#theme-style');
-	var $customizeMenu = $('#customize-menu');
+	var jq300app = jq300('#app');
+	var jq300styleLink = jq300('#theme-style');
+	var jq300customizeMenu = jq300('#customize-menu');
 
 	// Color switcher
-	var $customizeMenuColorBtns = $customizeMenu.find('.color-item');
+	var jq300customizeMenuColorBtns = jq300customizeMenu.find('.color-item');
 
 	// Position switchers
-	var $customizeMenuRadioBtns = $customizeMenu.find('.radio');
+	var jq300customizeMenuRadioBtns = jq300customizeMenu.find('.radio');
 
 
 	// /////////////////////////////////////////////////
@@ -1295,17 +1295,17 @@ $(function () {
 	*************************************************/
 
 	// set theme type
-	$customizeMenuColorBtns.on('click', function() {
-		themeSettings.themeName = $(this).data('theme');
+	jq300customizeMenuColorBtns.on('click', function() {
+		themeSettings.themeName = jq300(this).data('theme');
 
 		setThemeSettings();
 	});
 
 
-	$customizeMenuRadioBtns.on('click', function() {
+	jq300customizeMenuRadioBtns.on('click', function() {
 
-		var optionName = $(this).prop('name');
-		var value = $(this).val();
+		var optionName = jq300(this).prop('name');
+		var value = jq300(this).val();
 
 		themeSettings[optionName] = value;
 
@@ -1321,7 +1321,7 @@ $(function () {
 			setThemeControlsState();
 			saveThemeSettings();
 
-			$(document).trigger("themechange");	
+			jq300(document).trigger("themechange");	
 			
 			next();
 		});	
@@ -1334,25 +1334,25 @@ $(function () {
 	function setThemeState() {
         // set theme type
 		if (themeSettings.themeName) {
-			$styleLink.attr('href', modularpath + 'css/app-' + themeSettings.themeName + '.css');
+			jq300styleLink.attr('href', modularpath + 'css/app-' + themeSettings.themeName + '.css');
 		}
 		else {
-			$styleLink.attr('href', modularpath + 'css/app.css');
+			jq300styleLink.attr('href', modularpath + 'css/app.css');
 		}
 
 		// App classes
-		$app.removeClass('header-fixed footer-fixed sidebar-fixed');
+		jq300app.removeClass('header-fixed footer-fixed sidebar-fixed');
 
 		// set header
-		$app.addClass(themeSettings.headerPosition);
+		jq300app.addClass(themeSettings.headerPosition);
 
 		// set footer
-		$app.addClass(themeSettings.footerPosition);
+		jq300app.addClass(themeSettings.footerPosition);
 
 		// set footer
-		$app.addClass(themeSettings.sidebarPosition);
+		jq300app.addClass(themeSettings.sidebarPosition);
 
-		return $app;
+		return jq300app;
 	}
 
 	/************************************************
@@ -1361,25 +1361,25 @@ $(function () {
 
 	function setThemeControlsState() {
 		// set color switcher
-		$customizeMenuColorBtns.each(function() {
-			if($(this).data('theme') === themeSettings.themeName) {
-				$(this).addClass('active');
+		jq300customizeMenuColorBtns.each(function() {
+			if(jq300(this).data('theme') === themeSettings.themeName) {
+				jq300(this).addClass('active');
 			}
 			else {
-				$(this).removeClass('active');
+				jq300(this).removeClass('active');
 			}
 		});
 
 		// set radio buttons
-		$customizeMenuRadioBtns.each(function() {
-			var name = $(this).prop('name');
-			var value = $(this).val();
+		jq300customizeMenuRadioBtns.each(function() {
+			var name = jq300(this).prop('name');
+			var value = jq300(this).val();
 
 			if (themeSettings[name] === value) {
-				$(this).prop("checked", true );
+				jq300(this).prop("checked", true );
 			}
 			else {
-				$(this).prop("checked", false );
+				jq300(this).prop("checked", false );
 			}
 		});
 	}
@@ -1388,8 +1388,8 @@ $(function () {
 	*			Update theme color
 	*************************************************/
 	function setThemeColor(){
-		config.chart.colorPrimary = tinycolor($ref.find(".chart .color-primary").css("color"));	
-		config.chart.colorSecondary = tinycolor($ref.find(".chart .color-secondary").css("color"));	
+		config.chart.colorPrimary = tinycolor(jq300ref.find(".chart .color-primary").css("color"));	
+		config.chart.colorSecondary = tinycolor(jq300ref.find(".chart .color-secondary").css("color"));	
 	}
 
 	/************************************************
@@ -1411,9 +1411,9 @@ $(function () {
 	}
 
 });
-$(function() {
+jq300(function() {
 
-	$("body").addClass("loaded");
+	jq300("body").addClass("loaded");
 
 });
 
