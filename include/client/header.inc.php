@@ -32,12 +32,12 @@ if ($lang) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="<?php echo MODULAR_PATH; ?>css/vendor.css">
+    <link rel="stylesheet" href="<?php echo MODULAR_PATH; ?>css/hawk.css">
     <!-- Theme initialization -->
     <script>
             var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
             {};
             var modularpath = "<?php echo MODULAR_PATH; ?>";
-            console.log(modularpath);
             var themeName = themeSettings.themeName || '';
             if (themeName)
             {
