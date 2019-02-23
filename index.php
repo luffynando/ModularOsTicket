@@ -23,18 +23,23 @@ require(CLIENTINC_DIR.'header.inc.php');
 <section class="section">
     <div class="row">
         <div class="col-xl-8">
-            <?php
-            if ($cfg && $cfg->isKnowledgebaseEnabled()) { ?>
-                <div class="search-form">
-                <form method="get" action="kb/faq.php">
-                    <input type="hidden" name="a" value="search"/>
-                    <input type="text" name="q" class="search" placeholder="<?php echo __('Search our knowledge base'); ?>"/>
-                    <button type="submit" class="green button"><?php echo __('Search'); ?></button>
-                </form>
-                </div>
-            <?php } ?>
             <div class="card">
                 <div class="card-block">
+                    <?php
+                    if ($cfg && $cfg->isKnowledgebaseEnabled()) { ?>
+                    <form method="get" action="kb/faq.php">
+                    <div class="row">
+                        <div class="col-md-10 form-group">
+                            <input type="hidden" name="a" value="search"/>
+                            <input type="text" name="q" class="form-control" placeholder="<?php echo __('Search our knowledge base'); ?>"/>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <button type="submit" class="btn btn-primary-outline"><?php echo __('Search'); ?></button>
+                        </div>
+                    </div>
+                    <hr>
+                    </form>
+                    <?php } ?>
                     <?php if($cfg && ($page = $cfg->getLandingPage()))
                         echo $page->getBodyWithImages();
                     else

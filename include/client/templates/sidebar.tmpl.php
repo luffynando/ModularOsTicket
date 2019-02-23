@@ -3,7 +3,7 @@ $BUTTONS = isset($BUTTONS) ? $BUTTONS : true;
 ?>
 <div class="col-xl-4">
     <?php if ($BUTTONS) { ?>
-        <div class="card">
+        <div class="card sameheight-items">
             <div class="card-block">
             <?php
             if ($cfg->getClientRegistrationMode() != 'disabled'
@@ -24,18 +24,19 @@ $BUTTONS = isset($BUTTONS) ? $BUTTONS : true;
     if ($cfg->isKnowledgebaseEnabled()
         && ($faqs = FAQ::getFeatured()->select_related('category')->limit(5))
         && $faqs->all()) { ?>
-    <div class="card">
-        <div class="card-header">
-            <div class="header-block">
+    <div class="card sameheight-items">
+        <div class="card-block">
+            <div class="header-block bordered">
                 <h3 class="title"><?php echo __('Featured Questions'); ?></h3>
             </div>
-        </div>
-        <div class="card-block">
+            <hr>
+            <ul>
                 <?php   foreach ($faqs as $F) { ?>
-                <div><a href="<?php echo ROOT_PATH; ?>kb/faq.php?id=<?php
+                <li><a href="<?php echo ROOT_PATH; ?>kb/faq.php?id=<?php
                     echo urlencode($F->getId());
-                    ?>"><?php echo $F->getLocalQuestion(); ?></a></div>
+                    ?>"><?php echo $F->getLocalQuestion(); ?></a></li>
                 <?php   } ?>
+            </ul>
         </div>
     </div>
     <?php

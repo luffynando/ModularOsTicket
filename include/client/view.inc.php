@@ -37,7 +37,7 @@ if ($thisclient && $thisclient->isGuest()
             <div class="card sameheight-items items">
                 <div class="card-header bordered">
                     <div class="header-block">
-                            <a class="btn btn-success-outline" href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="<?php echo __('Reload'); ?>"><i class="refresh icon-refresh"></i></a>
+                            <a class="primary" href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="<?php echo __('Reload'); ?>"><i class="refresh icon-refresh"></i></a>
                             <h3 class="title"><b class="d-none d-md-block">
                             <?php $subject_field = TicketForm::getInstance()->getField('subject');
                             echo $subject_field->display($ticket->getSubject()); ?>
