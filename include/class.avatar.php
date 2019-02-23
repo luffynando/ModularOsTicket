@@ -28,7 +28,7 @@ abstract class Avatar {
         $style = ($size)
             ? sprintf('style="max-height:%spx"', $size)
             : '';
-        return "<img {$style} class=\"avatar\" alt=\""
+        return "<img {$style} class=\"avatar img-avatar\" alt=\""
             .__('Avatar').'" src="'.$this->getUrl($size).'" />';
     }
 

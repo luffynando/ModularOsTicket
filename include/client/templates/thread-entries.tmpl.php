@@ -15,7 +15,7 @@ $event = $events->current();
 
 $htmlId = $options['html-id'] ?: ('thread-'.$this->getId());
 ?>
-<div id="<?php echo $htmlId; ?>" data-thread-id="<?php echo $this->getId(); ?>">
+<ul class="timeline" id="<?php echo $htmlId; ?>" data-thread-id="<?php echo $this->getId(); ?>">
 <?php
 if (count($entries)) {
     // Go through all the entries and bucket them by time frame
@@ -41,9 +41,11 @@ if (count($entries)) {
                 $events->next();
                 $event = $events->current();
             }
-            ?><div id="thread-entry-<?php echo $entry->getId(); ?>"><?php
-            include 'thread-entry.tmpl.php';
-            ?></div><?php
+            ?>
+            <li id="thread-entry-<?php echo $entry->getId(); ?>"><?php
+                include 'thread-entry.tmpl.php';
+            ?></li>
+            <?php
         }
         $i++;
     }
@@ -61,4 +63,4 @@ if (count($entries) + $eventCount == 0) {
     echo '<p><em>'.__('No entries have been posted to this thread.').'</em></p>';
 }
 ?>
-</div>
+</ul>

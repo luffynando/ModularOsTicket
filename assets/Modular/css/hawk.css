@@ -146,15 +146,23 @@
 
 .timeline-body>p,
 .timeline-body>ul {
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 
 .timeline-body>p+p {
     margin-top: 5px;
 }
 
+.timeline-footer>p,
+.timeline-footer>ul {
+    margin-bottom: 0; 
+}
+
+.timeline-footer>p+p{
+    margin-top: 10px;
+}
+
 .img-avatar {
-    vertical-align: middle;
     width: 40px;
     height: 40px;
     border-radius: 50%;

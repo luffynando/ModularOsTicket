@@ -3,9 +3,13 @@ $desc = $event->getDescription(ThreadEvent::MODE_CLIENT);
 if (!$desc)
     return;
 ?>
-<div class="thread-event <?php if ($event->uid) echo 'action'; ?>">
-        <span class="type-icon">
-          <i class="faded icon-<?php echo $event->getIcon(); ?>"></i>
-        </span>
-        <span class="faded description"><?php echo $desc; ?></span>
+<li>
+<div class="timeline-badge">
+  <i class="faded icon-<?php echo $event->getIcon(); ?>"></i>
 </div>
+<div class="timeline-panel">
+  <div class="timeline-body">
+    <span class="faded description"><?php echo $desc; ?></span>
+  </div>
+</div>
+</li>
