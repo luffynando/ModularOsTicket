@@ -46,7 +46,7 @@
                     <section>
                         <div class="card-block row sameheight-items border-bottom">
                             <div class="col-md-2"><i class="fa fa-3x fa-folder-open"></i></div>
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="header-block">
                                     <h3 class="title"><?php echo sprintf('<a class="text-primary" href="faq.php?cid=%d">%s %s</a>',
                                     $C->getId(), Format::htmlchars($C->getFullName()),

@@ -47,7 +47,7 @@ require(CLIENTINC_DIR.'header.inc.php');
                     ?>
                 </div>
             </div>
-            <div>
+            <section>
             <?php
             if($cfg && $cfg->isKnowledgebaseEnabled()){
                 //FIXME: provide ability to feature or select random FAQs ??
@@ -55,29 +55,41 @@ require(CLIENTINC_DIR.'header.inc.php');
             <?php
             $cats = Category::getFeatured();
             if ($cats->all()) { ?>
-                <h1><?php echo __('Featured Knowledge Base Articles'); ?></h1>
+            <br>
+            <div class="subtitle-block">
+                <h3 class="subtitle"><?php echo __('Featured Knowledge Base Articles'); ?></h3>
+            </div>
+            <div class="card">
                 <?php
             }
             foreach ($cats as $C) { ?>
-                <div class="featured-category front-page">
-                    <i class="icon-folder-open icon-2x"></i>
-                    <div class="category-name">
-                        <?php echo $C->getName(); ?>
+                <section>
+                <div class="card-block row sameheight-items">
+                    <div class="col-md-2"><i class="fa fa-3x fa-folder-open"></i></div>
+                    <div class="col-md-10">
+                        <div class="header-block">
+                            <h3 class="title"><?php echo $C->getName(); ?></h3>
+                        </div>
+                        <div class="card-block">
+                        <?php foreach ($C->getTopArticles() as $F) { ?>
+                            <div class="article-headline">
+                                <div class="article-title"><a href="<?php echo ROOT_PATH;
+                                    ?>kb/faq.php?id=<?php echo $F->getId(); ?>"><?php
+                                    echo $F->getQuestion(); ?></a></div>
+                                <div class="article-teaser"><?php echo $F->getTeaser(); ?></div>
+                            </div>
+                        <?php } ?>
+                        </div>
                     </div>
-                    <?php foreach ($C->getTopArticles() as $F) { ?>
-                    <div class="article-headline">
-                        <div class="article-title"><a href="<?php echo ROOT_PATH;
-                        ?>kb/faq.php?id=<?php echo $F->getId(); ?>"><?php
-                        echo $F->getQuestion(); ?></a></div>
-                        <div class="article-teaser"><?php echo $F->getTeaser(); ?></div>
-                    </div>
-                    <?php } ?>
                 </div>
+                </section>
+                <hr>
             <?php
-            }
-            }
-            ?>
+            } ?>
             </div>
+            <?php }
+            ?>
+            </section>
         </div>
         <?php include CLIENTINC_DIR.'templates/sidebar.tmpl.php'; ?>
     </div>

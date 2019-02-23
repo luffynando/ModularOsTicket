@@ -168,6 +168,18 @@
     border-radius: 50%;
 }
 
+.img>img{
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    color: #ffffff;
+    text-align: center;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .fullpage.app{
     position: absolute;
     top: 0;
