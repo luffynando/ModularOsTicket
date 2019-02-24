@@ -21,4 +21,16 @@ avatar.php
 bootstrap.php
 captcha.php
 file.php
+/css
+/js
+login.php
+logo.php
+logout.php
+main.inc.php
+manage.php
+open.php
+profile.php
+pwreset.php
+secure.inc.php
+
 
