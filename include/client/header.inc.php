@@ -111,17 +111,13 @@ if ($lang) {
                 <div class="header-block header-block-search">
                 </div>
                 <div class="header-block header-block-buttons">
-                    <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">
-                        <i class="fa fa-github-alt"></i>
-                        <span>View on GitHub</span>
-                    </a>
-                    <a href="https://github.com/modularcode/modular-admin-html/stargazers" class="btn btn-sm header-btn">
+                    <a href="https://github.com/luffynando/ModularOsTicket/stargazers" class="btn btn-sm header-btn">
                         <i class="fa fa-star"></i>
                         <span>Star Us</span>
                     </a>
-                    <a href="https://github.com/modularcode/modular-admin-html/releases" class="btn btn-sm header-btn">
-                        <i class="fa fa-cloud-download"></i>
-                        <span>Download .zip</span>
+                    <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">
+                        <i class="fa fa-github"></i>
+                        <span>Modular Admin</span>
                     </a>
                 </div>
                 <div class="header-block header-block-nav">
@@ -159,10 +155,10 @@ if ($lang) {
                             <?php echo '<li class="d-none d-md-block"><a>'.__('Guest User').'</a></li>'; ?><?php
                         }
                         if ($thisclient && $thisclient->isValid() && $thisclient->isGuest()) { ?>
-                            <li class="header-block header-block-buttons"><a class="btn header-btn" href="<?php echo $signout_url; ?>"><i class="fa fa-sign-out"></i><span><?php echo __('Sign Out'); ?></span></a></li><?php
+                            <li class="header-block header-block-buttons"><a class="btn header-btn" href="<?php echo $signout_url; ?>"><i class="fa fa-sign-out"></i><span>&nbsp;<?php echo __('Sign Out'); ?></span></a></li><?php
                         }
                         elseif ($cfg->getClientRegistrationMode() != 'disabled') { ?>
-                            <li class="header-block header-block-buttons"><a class="btn header-btn" href="<?php echo $signin_url; ?>"><i class="fa fa-sign-in"></i><span><?php echo __('Sign In'); ?></span></a></li>
+                            <li class="header-block header-block-buttons"><a class="btn header-btn" href="<?php echo $signin_url; ?>"><i class="fa fa-sign-in"></i><span>&nbsp;<?php echo __('Sign In'); ?></span></a></li>
                         <?php
                         }
                     } ?>

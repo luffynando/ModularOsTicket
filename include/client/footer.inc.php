@@ -5,7 +5,8 @@
         </div>
         <div class="footer-block author">
             <p><?php echo __('Copyright &copy;'); ?> <?php echo date('Y'); ?> <?php
-            echo Format::htmlchars((string) $ost->company ?: 'osTicket.com'); ?> - <?php echo __('All rights reserved.'); ?></p>
+            echo Format::htmlchars((string) $ost->company ?: 'osTicket.com'); ?> - Made with <i class="fa fa-heart text-danger"></i> by <a href="https://teamredhawk.net" target="_blank">TeamRedHawk</a>
+            </p>
         </div>
     </footer>
 </div>
