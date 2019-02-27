@@ -36,7 +36,6 @@
 /kb
 /tickets.php
 /view.php
-/scp
 /include/.htaccess
 /include/.MANIFEST
 /include/upgrader/streams
@@ -137,11 +136,5 @@
 /include/ajax.tickets.php
 /include/ajax.tips.php
 /include/ajax.upgrader.php
-include/staff/*.inc.php
-include/staff/pwreset.*.php
-include/staff/*.php
-include/staff/templates/*.tmpl.php
-!include/staff/templates/timezone.tmpl.php
-
 
 
